@@ -47,15 +47,16 @@ module.exports = {
     const ctx = canvas.getContext('2d');
     console.log('yo');
     // const url = await fetch('https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png')
-    // const buffer = await getBufferFromUrl(
+    const buffer = await getBufferFromUrl(
+      // 'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
+      'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
+    );
+    // let blob = await fetch(
     //   'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-    // );
-    let blob = await fetch(
-      'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-    ).then((r) => r.blob());
-    blob = blob.slice(0, blob.size, 'image/png');
-    console.log(blob);
-    const monke = await Canvas.loadImage(blob);
+    // ).then((r) => r.blob());
+    // blob = blob.slice(0, blob.size, 'image/png');
+    console.log(buffer);
+    const monke = await Canvas.loadImage(buffer);
     // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
