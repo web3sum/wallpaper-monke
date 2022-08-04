@@ -53,9 +53,11 @@ module.exports = {
     let blob = await fetch(
       'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
     ).then((r) => r.blob());
+    blob = blob.slice(0, blob.size, 'image/png');
     console.log(blob);
     const monke = await Canvas.loadImage(
-      'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
+      // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
+      URL.createObjectURL(blob)
     );
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
