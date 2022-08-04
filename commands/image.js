@@ -54,36 +54,24 @@ module.exports = {
       encoding: null,
     };
 
-    // request(options, function (error, response, body) {
-    //   if (error) {
-    //     console.error('error:', error);
-    //   } else {
-    //     console.log('Response: StatusCode:', response && response.statusCode);
-    //     console.log(
-    //       'Response: Body: Length: %d. Is buffer: %s',
-    //       body.length,
-    //       body instanceof Buffer
-    //     );
-    //     fs.writeFileSync('test.png', body);
-    //   }
-    // });
+    const req = request(options, function (error, response, body) {
+      if (error) {
+        console.error('error:', error);
+      } else {
+        console.log('Response: StatusCode:', response && response.statusCode);
+        console.log(
+          'Response: Body: Length: %d. Is buffer: %s',
+          body.length,
+          body instanceof Buffer
+        );
+        // fs.writeFileSync('test.png', body);
+        return body;
+      }
+    });
+    console.log(req);
+    return;
 
-    const monke = await Canvas.loadImage(
-      request(options, function (error, response, body) {
-        if (error) {
-          console.error('error:', error);
-        } else {
-          console.log('Response: StatusCode:', response && response.statusCode);
-          console.log(
-            'Response: Body: Length: %d. Is buffer: %s',
-            body.length,
-            body instanceof Buffer
-          );
-          // fs.writeFileSync('test.png', body);
-          return body;
-        }
-      })
-    );
+    const monke = await Canvas.loadImage();
     // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
