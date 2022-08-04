@@ -57,7 +57,7 @@ module.exports = {
     console.log(blob);
     const monke = await Canvas.loadImage(
       // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
-      URL.createObjectURL(blob)
+      URL.createObjectURL({ obj: blob })
     );
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
