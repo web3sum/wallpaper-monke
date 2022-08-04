@@ -1,11 +1,8 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const Canvas = require('@napi-rs/canvas');
 const path = require('node:path');
-const https = require('https');
 const { URL } = require('node:url');
-const fetch = require('node-fetch');
 const request = require('request');
-const fs = require('fs');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,25 +31,25 @@ module.exports = {
   async execute(interaction) {
     const id = interaction.options.getInteger('id');
     const user = interaction.user;
-    // console.log(id);
     if (id < 1 || id > 5000) {
       await interaction.reply(
         `hey <@${user.id}>, id must be between 1 and 5000!`
       );
       return;
     }
+
     await interaction.reply(
       `hey <@${user.id}>, hang tight! monke #${id} will swing around soon!`
     );
 
-    const canvas = Canvas.createCanvas(1170, 2532);
-    const ctx = canvas.getContext('2d');
-
     const options = {
-      url: `https://github.com/web3sum/wallpaper-monke/blob/main/1170/${id}.png?raw=true`,
+      url: `https://github.com/web3sum/monke-1170px/blob/main/${id}.png?raw=true`,
       method: 'get',
       encoding: null,
     };
+
+    const canvas = Canvas.createCanvas(1170, 2532);
+    const ctx = canvas.getContext('2d');
 
     request(options, async function (error, response, body) {
       if (error) {
@@ -82,18 +79,3 @@ module.exports = {
     });
   },
 };
-
-async function getBufferFromUrl(url) {
-  return new Promise((resolve) => {
-    https.get(url, (response) => {
-      const body = [];
-      response
-        .on('data', (chunk) => {
-          body.push(chunk);
-        })
-        .on('end', () => {
-          resolve(Buffer.concat(body));
-        });
-    });
-  });
-}
