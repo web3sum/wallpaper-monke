@@ -47,6 +47,7 @@ module.exports = {
       // path.join(__dirname, '..', '1170', `${id}.png`)
       // `../img/${interaction.options.getString('id')}.png`
     );
+    console.log('yo');
     const color = interaction.options.getString('color');
     const background = await Canvas.loadImage(
       path.join(__dirname, '..', 'phone', `ip12-${color}.png`)
