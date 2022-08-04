@@ -49,7 +49,7 @@ module.exports = {
     const ctx = canvas.getContext('2d');
 
     const options = {
-      url: 'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png',
+      url: 'https://i.imgur.com/vQqcQkZ.jpeg',
       method: 'get',
       encoding: null,
     };
