@@ -5,6 +5,7 @@ const https = require('https');
 const { URL } = require('node:url');
 const fetch = require('node-fetch');
 const request = require('request');
+const fs = require('fs');
 
 module.exports = {
   data: new SlashCommandBuilder()
