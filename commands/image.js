@@ -36,14 +36,15 @@ module.exports = {
       );
       return;
     }
-    await interaction.reply(
-      `hey <@${user.id}>, hang tight! monke #${id} will swing around soon!`
-    );
+    // await interaction.reply(
+    //   `hey <@${user.id}>, hang tight! monke #${id} will swing around soon!`
+    // );
 
     const canvas = Canvas.createCanvas(1170, 2532);
     const ctx = canvas.getContext('2d');
     const monke = await Canvas.loadImage(
-      path.join(__dirname, '..', '1170', `${id}.png`)
+      'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
+      // path.join(__dirname, '..', '1170', `${id}.png`)
       // `../img/${interaction.options.getString('id')}.png`
     );
     const color = interaction.options.getString('color');
