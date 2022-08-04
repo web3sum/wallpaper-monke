@@ -47,7 +47,7 @@ module.exports = {
     // const url = await fetch('https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png')
 
     const monke = await Canvas.loadImage(
-      getBufferFromUrl(
+      await getBufferFromUrl(
         'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
       )
     );
