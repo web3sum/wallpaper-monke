@@ -49,7 +49,7 @@ module.exports = {
     const ctx = canvas.getContext('2d');
 
     const options = {
-      url: 'https://i.imgur.com/vQqcQkZ.jpeg',
+      url: 'https://i.imgur.com/uuprz9M.png',
       method: 'get',
       encoding: null,
     };
