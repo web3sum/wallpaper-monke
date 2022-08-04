@@ -4,6 +4,7 @@ const path = require('node:path');
 const https = require('https');
 const { URL } = require('node:url');
 const fetch = require('node-fetch');
+const request = require('request');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,18 +46,28 @@ module.exports = {
 
     const canvas = Canvas.createCanvas(1170, 2532);
     const ctx = canvas.getContext('2d');
-    console.log('yo');
-    // const url = await fetch('https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png')
-    const buffer = await getBufferFromUrl(
-      // 'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-      'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
-    );
-    // let blob = await fetch(
-    //   'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-    // ).then((r) => r.blob());
-    // blob = blob.slice(0, blob.size, 'image/png');
-    console.log(buffer);
-    const monke = await Canvas.loadImage(buffer);
+
+    const options = {
+      url: 'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png',
+      method: 'get',
+      encoding: null,
+    };
+
+    request(options, function (error, response, body) {
+      if (error) {
+        console.error('error:', error);
+      } else {
+        console.log('Response: StatusCode:', response && response.statusCode);
+        console.log(
+          'Response: Body: Length: %d. Is buffer: %s',
+          body.length,
+          body instanceof Buffer
+        );
+        fs.writeFileSync('test.png', body);
+      }
+    });
+    return;
+    const monke = await Canvas.loadImage(globalThis.URL);
     // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
