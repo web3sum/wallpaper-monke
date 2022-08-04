@@ -54,7 +54,6 @@ module.exports = {
       encoding: null,
     };
 
-    let monke = '';
     request(options, async function (error, response, body) {
       if (error) {
         console.error('error:', error);
@@ -66,30 +65,21 @@ module.exports = {
           body instanceof Buffer
         );
         // fs.writeFileSync('test.png', body);
-        monke = await Canvas.loadImage(body);
+        const monke = await Canvas.loadImage(body);
+
+        const color = interaction.options.getString('color');
+        const background = await Canvas.loadImage(
+          path.join(__dirname, '..', 'phone', `ip12-${color}.png`)
+        );
+        ctx.drawImage(background, 0, 0);
+        ctx.drawImage(monke, 0, 1362);
+
+        const attachment = new AttachmentBuilder(await canvas.encode('png'), {
+          name: `${id}.png`,
+        });
+        await interaction.followUp({ files: [attachment] });
       }
     });
-
-    // const monke = await Canvas.loadImage();
-    // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
-
-    // path.join(__dirname, '..', '1170', `${id}.png`)
-    // `../img/${interaction.options.getString('id')}.png`
-    const color = interaction.options.getString('color');
-    const background = await Canvas.loadImage(
-      path.join(__dirname, '..', 'phone', `ip12-${color}.png`)
-    );
-    ctx.drawImage(background, 0, 0);
-    // ctx.imageSmoothingEnabled = false;
-    // ctx.imageSmoothingEnabled = false;
-
-    // ctx.imageSmoothingQuality = 'low';
-    ctx.drawImage(monke, 0, 1362);
-
-    const attachment = new AttachmentBuilder(await canvas.encode('png'), {
-      name: `${id}.png`,
-    });
-    await interaction.followUp({ files: [attachment] });
   },
 };
 
