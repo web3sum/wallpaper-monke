@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const Canvas = require('@napi-rs/canvas');
 const path = require('node:path');
+const https = require('https');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,12 +43,17 @@ module.exports = {
 
     const canvas = Canvas.createCanvas(1170, 2532);
     const ctx = canvas.getContext('2d');
-    const monke = await Canvas.loadImage(
-      'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-      // path.join(__dirname, '..', '1170', `${id}.png`)
-      // `../img/${interaction.options.getString('id')}.png`
-    );
     console.log('yo');
+    // const url = await fetch('https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png')
+
+    const monke = await Canvas.loadImage(
+      getBufferFromUrl(
+        'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
+      )
+    );
+
+    // path.join(__dirname, '..', '1170', `${id}.png`)
+    // `../img/${interaction.options.getString('id')}.png`
     const color = interaction.options.getString('color');
     const background = await Canvas.loadImage(
       path.join(__dirname, '..', 'phone', `ip12-${color}.png`)
@@ -65,3 +71,18 @@ module.exports = {
     await interaction.followUp({ files: [attachment] });
   },
 };
+
+async function getBufferFromUrl(url) {
+  return new Promise((resolve) => {
+    https.get(url, (response) => {
+      const body = [];
+      response
+        .on('data', (chunk) => {
+          body.push(chunk);
+        })
+        .on('end', () => {
+          resolve(Buffer.concat(body));
+        });
+    });
+  });
+}
