@@ -70,8 +70,6 @@ module.exports = {
       }
     });
 
-    return;
-
     // const monke = await Canvas.loadImage();
     // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
 
