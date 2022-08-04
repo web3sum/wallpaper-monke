@@ -3,7 +3,7 @@ const Canvas = require('@napi-rs/canvas');
 const path = require('node:path');
 const https = require('https');
 const { URL } = require('node:url');
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
 module.exports = {
   data: new SlashCommandBuilder()
