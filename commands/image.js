@@ -54,8 +54,8 @@ module.exports = {
       encoding: null,
     };
 
-    let monke = ''
-    const req = request(options, function (error, response, body) {
+    let monke = '';
+    request(options, async function (error, response, body) {
       if (error) {
         console.error('error:', error);
       } else {
