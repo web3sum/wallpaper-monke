@@ -2,6 +2,7 @@ const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const Canvas = require('@napi-rs/canvas');
 const path = require('node:path');
 const https = require('https');
+const { URL } = require('node:url');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,11 +46,14 @@ module.exports = {
     const ctx = canvas.getContext('2d');
     console.log('yo');
     // const url = await fetch('https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png')
-    const buffer = await getBufferFromUrl(
+    // const buffer = await getBufferFromUrl(
+    //   'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
+    // );
+    let blob = await fetch(
       'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-    );
-    console.log(buffer);
-    // const monke = await Canvas.loadImage();
+    ).then((r) => r.blob());
+    console.log(blob);
+    const monke = await Canvas.loadImage(URL.createObjectURL(blob));
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
     // `../img/${interaction.options.getString('id')}.png`
