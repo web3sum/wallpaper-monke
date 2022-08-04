@@ -45,12 +45,11 @@ module.exports = {
     const ctx = canvas.getContext('2d');
     console.log('yo');
     // const url = await fetch('https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png')
-
-    const monke = await Canvas.loadImage(
-      await getBufferFromUrl(
-        'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
-      )
+    const buffer = await getBufferFromUrl(
+      'https://github.com/web3sum/wallpaper-monke/blob/main/1170/1.png'
     );
+    console.log(buffer);
+    // const monke = await Canvas.loadImage();
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
     // `../img/${interaction.options.getString('id')}.png`
