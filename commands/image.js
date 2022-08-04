@@ -41,7 +41,7 @@ module.exports = {
       `hey <@${user.id}>, hang tight! monke #${id} will swing around soon!`
     );
 
-    const options = {
+    const options_monke = {
       url: `https://github.com/web3sum/monke-1170px/blob/main/${id}.png?raw=true`,
       method: 'get',
       encoding: null,
@@ -50,7 +50,7 @@ module.exports = {
     const canvas = Canvas.createCanvas(1170, 2532);
     const ctx = canvas.getContext('2d');
 
-    request(options, async function (error, response, body) {
+    request(options_monke, async function (error, response, body) {
       if (error) {
         console.error('error:', error);
       } else {
@@ -64,16 +64,37 @@ module.exports = {
         const monke = await Canvas.loadImage(body);
 
         const color = interaction.options.getString('color');
-        const background = await Canvas.loadImage(
-          path.join(__dirname, '..', 'phone', `ip12-${color}.png`)
-        );
-        ctx.drawImage(background, 0, 0);
-        ctx.drawImage(monke, 0, 1362);
+        const options_phone = {
+          url: `https://github.com/web3sum/monke-1170px/blob/main/ip12-${color}.png?raw=true`,
+          method: 'get',
+          encoding: null,
+        };
+        request(options_monke, async function (error, response, body) {
+          if (error) {
+            console.error('error:', error);
+          } else {
+            console.log(
+              'Response: StatusCode:',
+              response && response.statusCode
+            );
+            console.log(
+              'Response: Body: Length: %d. Is buffer: %s',
+              body.length,
+              body instanceof Buffer
+            );
+            const background = await Canvas.loadImage(body);
+            ctx.drawImage(background, 0, 0);
+            ctx.drawImage(monke, 0, 1362);
 
-        const attachment = new AttachmentBuilder(await canvas.encode('png'), {
-          name: `${id}.png`,
+            const attachment = new AttachmentBuilder(
+              await canvas.encode('png'),
+              {
+                name: `${id}.png`,
+              }
+            );
+            await interaction.followUp({ files: [attachment] });
+          }
         });
-        await interaction.followUp({ files: [attachment] });
       }
     });
   },
