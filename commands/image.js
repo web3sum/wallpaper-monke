@@ -54,6 +54,7 @@ module.exports = {
       encoding: null,
     };
 
+    let monke = ''
     const req = request(options, function (error, response, body) {
       if (error) {
         console.error('error:', error);
@@ -65,13 +66,13 @@ module.exports = {
           body instanceof Buffer
         );
         // fs.writeFileSync('test.png', body);
-        return body;
+        monke = await Canvas.loadImage(body);
       }
     });
-    console.log(req);
+
     return;
 
-    const monke = await Canvas.loadImage();
+    // const monke = await Canvas.loadImage();
     // 'https://drive.google.com/file/d/156YX_aC0duPJ9Zb7JYMEDgD34o1PcXHB/view?usp=sharing'
 
     // path.join(__dirname, '..', '1170', `${id}.png`)
