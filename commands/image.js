@@ -36,9 +36,9 @@ module.exports = {
       );
       return;
     }
-    // await interaction.reply(
-    //   `hey <@${user.id}>, hang tight! monke #${id} will swing around soon!`
-    // );
+    await interaction.reply(
+      `hey <@${user.id}>, hang tight! monke #${id} will swing around soon!`
+    );
 
     const canvas = Canvas.createCanvas(1170, 2532);
     const ctx = canvas.getContext('2d');
