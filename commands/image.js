@@ -82,6 +82,7 @@ async function fullImage(interaction) {
               const phone_canvas = await bufferToCanvas(phone_buffer);
 
               ctx.drawImage(phone_canvas, 0, 0);
+              ctx.imageSmoothingEnabled = false;
               ctx.drawImage(monke_canvas, 0, 1362, 1170, 1170);
 
               const attachment = new AttachmentBuilder(
