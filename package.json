@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "git add ./commands/image.js && git commit -m \"yo\" && npm run command && node index.js",
-    "command": "node deploy-commands.js"
+    "command": "node deploy-commands.js",
+    "start": "node deploy-commands.js && node index.js",
+    "pkg": "git add package.json && git add package-lock.json"
   },
   "author": "baacode",
   "license": "ISC",

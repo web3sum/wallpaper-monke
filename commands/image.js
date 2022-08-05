@@ -50,7 +50,7 @@ async function fullImage(interaction) {
   );
   const options_monke = {
     hostname: 'raw.githubusercontent.com',
-    path: `/web3sum/monke-1170px/main/${id}.png`,
+    path: `/web3sum/monke-24px/main/${id}.png`,
   };
 
   const canvas = Canvas.createCanvas(1170, 2532);
@@ -82,7 +82,7 @@ async function fullImage(interaction) {
               const phone_canvas = await bufferToCanvas(phone_buffer);
 
               ctx.drawImage(phone_canvas, 0, 0);
-              ctx.drawImage(monke_canvas, 0, 1362);
+              ctx.drawImage(monke_canvas, 0, 1362, 1170, 1170);
 
               const attachment = new AttachmentBuilder(
                 await canvas.encode('png'),
