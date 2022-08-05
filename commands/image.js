@@ -50,7 +50,7 @@ async function fullImage(interaction) {
             })
             .on('end', async () => {
               const phone_buffer = Buffer.concat(phone_data);
-              const phone_canvas = bufferToCanvas(phone_buffer);
+              const phone_canvas = await bufferToCanvas(phone_buffer);
 
               ctx.drawImage(phone_canvas, 0, 0);
               ctx.drawImage(monke_canvas, 0, 1362);
