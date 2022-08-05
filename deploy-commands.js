@@ -1,12 +1,13 @@
-require('dotenv').config();
+// require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord.js');
+const config = require('./config.json');
 
-const clientId = process.env.CLIENT_ID;
-const guildId = process.env.GUILD_ID;
-const token = process.env.TOKEN;
+const clientId = config.CLIENT_ID || process.env.CLIENT_ID;
+const guildId = config.GUILD_ID || process.env.GUILD_ID;
+const token = config.TOKEN || process.env.TOKEN;
 
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
